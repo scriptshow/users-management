@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account List</title>
+</head>
+<body>
+<a href={% url 'accounts_add' %}><button >Add Account</button></a>
+    <table style="width:100%">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>IBAN</th>
+            <th>Actions</th>
+        </tr>
+        {% for account in accounts_data %}
+        <tr>
+            <th>{{ account.first_name }}</th>
+            <th>{{ account.last_name }}</th>
+            <th>{{ account.iban }}</th>
+            {% if account.is_editable %}
+                <th>
+                    <a href={% url 'accounts_modify' account.id  %}><button >Modify</button></a>
+                    <form method="POST" action={% url 'accounts_delete' account.id %} >
+                    {% csrf_token %}
+                        <button type="submit" value="Submit">Delete</button>
+                    </form>
+                </th>
+            {% else %}
+                <th></th>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Account</title>
+</head>
+<body>
+<form method="POST" action={% url 'accounts_modify' account_data.id %}>
+{% csrf_token %}
+    First name: <input type="text" name="first_name" id="first_name" value="{{ account_data.first_name }}"><br>
+    Last name: <input type="text" name="last_name" id="last_name" value="{{ account_data.last_name }}"><br>
+    IBAN: <input type="text" name="iban" id="iban" value="{{ account_data.iban }}"><br>
+    <button type="submit" value="Submit">Sumbit</button>
+</form>
+</body>
+</html>

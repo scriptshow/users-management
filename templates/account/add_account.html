@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Account</title>
+</head>
+<body>
+<form action={% url 'accounts_add' %} method="POST">
+{% csrf_token %}
+    First name: <input type="text" name="first_name" id="first_name"><br>
+    Last name: <input type="text" name="last_name" id="last_name"><br>
+    IBAN: <input type="text" name="iban" id="iban"><br>
+    <button type="submit" value="Submit">Sumbit</button>
+</form>
+</body>
+</html>
