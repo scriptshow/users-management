@@ -1,4 +1,4 @@
-"""usersmanagement URL Configuration
+"""accountsmanagement URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -13,16 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-import account.urls
+from django.urls import path
 from account import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('login/', views.login, name='login'),
-    path('login/after', views.after_login, name='after_login'),
-    path('logout/', views.logout, name='logout'),
-    path('auth/', include('social_django.urls', namespace='social')),
-    path('accounts/', include(account.urls)),
+    path('', views.accounts, name='accounts'),
+    path('add', views.accounts_add, name='accounts_add'),
+    path('modify/<int:id>', views.accounts_modify, name='accounts_modify'),
+    path('delete/<int:id>', views.accounts_delete, name='accounts_delete'),
 ]
