@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # Added for Google Auth
+                'social_django.context_processors.login_redirect',  # Added for Google Auth
             ],
         },
     },
@@ -100,6 +104,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Adding the google authentication needs
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+LOGIN_URL = 'login'
+
+# Function to be executed after the success Google Authentication, used to upgrade the permissions to Administrator
+LOGIN_REDIRECT_URL = 'after_login'
+
+# Google API KEY
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1004293666145-8umatqo78csrfqgq1frhcdhvqv9bq415.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'yMZ07sUmLTxIyiagBY6ibK3w'
+
+# Email list to filter which emails from Google auth are allowed to be Administrators, leave '*' to allow everyone
+ADMIN_LIST = ['*']
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
