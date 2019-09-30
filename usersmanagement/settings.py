@@ -83,6 +83,14 @@ WSGI_APPLICATION = 'usersmanagement.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB_NAME'),
+        'HOST': os.environ.get('POSTGRES_DB_HOST'),
+        'PORT': os.environ.get('POSTGRES_DB_PORT'),
+        'USERNAME': os.environ.get('POSTGRES_DB_USERNAME'),
+        'PASSWORD': os.environ.get('POSTGRES_DB_PASSWORD'),
+    },
+    'development': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
@@ -125,8 +133,10 @@ REST_FRAMEWORK = {
 }
 
 # Google API KEY
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1004293666145-8umatqo78csrfqgq1frhcdhvqv9bq415.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'yMZ07sUmLTxIyiagBY6ibK3w'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1004293666145-8umatqo78csrfqgq1frhcdhvqv9bq415.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'yMZ07sUmLTxIyiagBY6ibK3w'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_OAUTH2_KEY'),
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_OAUTH2_SECRET'),
 
 # We will need the email information as well, to filter the people who will be administrator
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
