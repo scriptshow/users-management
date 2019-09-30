@@ -23,14 +23,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%ki3v_m=crzvkks^np9y*9q!btw524n2v9d&!h*x@#*68v1y10'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# Allowing localhost
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
+# By default, allowing all (only for testing when developing)
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -90,10 +91,10 @@ DATABASES = {
         'USERNAME': os.environ.get('POSTGRES_DB_USERNAME'),
         'PASSWORD': os.environ.get('POSTGRES_DB_PASSWORD'),
     },
-    'development': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    # 'development': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
 }
 
 
@@ -132,7 +133,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-# Google API KEY
+# Google API KEY (Uncomment to use my Google KEY and Secret, only for testing)
 # SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1004293666145-8umatqo78csrfqgq1frhcdhvqv9bq415.apps.googleusercontent.com'
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'yMZ07sUmLTxIyiagBY6ibK3w'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get('GOOGLE_OAUTH2_KEY'),
@@ -142,7 +143,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get('GOOGLE_OAUTH2_SECRET'),
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
 
 # Email list to filter which emails from Google auth are allowed to be Administrators, leave '*' to allow everyone
-ADMIN_LIST = ['salvagalaxys@gmail.com', ]
+ADMIN_LIST = ['*']
 
 # Fields to search from User table
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'first_name', 'email']
