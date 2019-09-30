@@ -18,11 +18,11 @@ class Account(models.Model):
 
     # Getting the max length from: https://en.wikipedia.org/wiki/International_Bank_Account_Number#Structure
     # 2 Country code + 2 Check digits + 30 BBAN (Basic Bank Account Number)
-    iban = models.CharField(max_length=34, null=False, blank=False)
+    iban = models.CharField(max_length=34, null=False, blank=False, unique=True)
 
     # Field to manage who created the user to restrict the permissions
     creator = models.ForeignKey(User, related_name="creator", null=False, blank=False, on_delete=models.CASCADE)
 
     # Returning first name + last name to have a nice view in Administration page
     def __str__(self):
-        return '{0} {1}'.format(self.first_name, self.last_name)
+        return '{0} {1} - {2}'.format(self.first_name, self.last_name, self.iban)
