@@ -1,4 +1,4 @@
-"""usersmanagement URL Configuration
+"""account URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -13,18 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.contrib import admin
-from django.urls import path, include
-import account.urls
+from django.urls import path
 from account import views
 
-app_name = 'users-management'
+app_name = 'accounts'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('logout/', views.logout, name='logout'),
-    # allowing backend as variable to have the possibility to add more authenticators than Google
-    url(r'^auth/(?P<backend>[^/]+)/$', views.token_authentication),
-    path('accounts/', include(account.urls, namespace='accounts')),
+    path('get/all', views.accounts, name='accounts'),
+    path('add/', views.accounts_add, name='accounts_add'),
+    path('update/', views.accounts_modify, name='accounts_modify'),
+    path('delete/', views.accounts_delete, name='accounts_delete'),
 ]
