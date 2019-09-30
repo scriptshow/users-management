@@ -166,14 +166,13 @@ def accounts_add(request):
                 'status': 'ok',
                 'message': 'created'
             }
+            return Response(response, status=status.HTTP_201_CREATED)
     else:
         # If not valid, raise an error for data_validation
         response = {
             {'errors': {'data_validation_error': 'Error validating data'}}
         }
         return Response(response, status=status.HTTP_400_BAD_REQUEST)
-
-    return Response(response)
 
 
 @api_view(http_method_names=['PUT'])
