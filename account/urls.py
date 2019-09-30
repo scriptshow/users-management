@@ -1,4 +1,4 @@
-"""accountsmanagement URL Configuration
+"""account URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -16,9 +16,11 @@ Including another URLconf
 from django.urls import path
 from account import views
 
+app_name = 'accounts'
+
 urlpatterns = [
-    path('', views.accounts, name='accounts'),
-    path('add', views.accounts_add, name='accounts_add'),
-    path('modify/<int:id>', views.accounts_modify, name='accounts_modify'),
-    path('delete/<int:id>', views.accounts_delete, name='accounts_delete'),
+    path('get/all', views.accounts, name='accounts'),
+    path('add/', views.accounts_add, name='accounts_add'),
+    path('update/', views.accounts_modify, name='accounts_modify'),
+    path('delete/', views.accounts_delete, name='accounts_delete'),
 ]

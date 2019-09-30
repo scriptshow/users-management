@@ -13,16 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 import account.urls
 from account import views
 
+app_name = 'users-management'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', views.login, name='login'),
-    path('login/after', views.after_login, name='after_login'),
     path('logout/', views.logout, name='logout'),
-    path('auth/', include('social_django.urls', namespace='social')),
-    path('accounts/', include(account.urls)),
+    # allowing backend as variable to have the possibility to add more authenticators than Google
+    url(r'^auth/(?P<backend>[^/]+)/$', views.token_authentication),
+    path('accounts/', include(account.urls, namespace='accounts')),
 ]
