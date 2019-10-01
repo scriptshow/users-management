@@ -26,7 +26,7 @@ SECRET_KEY = '%ki3v_m=crzvkks^np9y*9q!btw524n2v9d&!h*x@#*68v1y10'
 DEBUG = False
 
 # Allowing localhost
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.environ.get('ALLOWED_HOSTS')]
 
 # By default, allowing all (only for testing when developing)
 CORS_ORIGIN_ALLOW_ALL = True
@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': os.environ.get('POSTGRES_DB_NAME'),
         'HOST': os.environ.get('POSTGRES_DB_HOST'),
         'PORT': os.environ.get('POSTGRES_DB_PORT'),
-        'USERNAME': os.environ.get('POSTGRES_DB_USERNAME'),
+        'USER': os.environ.get('POSTGRES_DB_USERNAME'),
         'PASSWORD': os.environ.get('POSTGRES_DB_PASSWORD'),
     },
     # 'development': {
